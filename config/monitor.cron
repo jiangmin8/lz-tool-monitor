@@ -1,0 +1,12 @@
+# 系统监控定时任务配置
+# 每分钟执行一次服务健康检查
+*/1 * * * * /media/lz/baba/monitor/scripts/monitor_main.sh -s > /dev/null 2>&1
+
+# 每5分钟执行一次GPU监控
+*/5 * * * * /media/lz/baba/monitor/scripts/check_gpu.sh > /dev/null 2>&1
+
+# 每天凌晨1点清理7天前的旧日志
+0 1 * * * /media/lz/baba/monitor/scripts/alert_notify.sh clean_old_logs > /dev/null 2>&1
+
+# 每天凌晨2点生成状态报告
+0 2 * * * /media/lz/baba/monitor/scripts/monitor_main.sh -s > /media/lz/baba/monitor/logs/daily_report_$(date +\%Y\%m\%d).log 2>&1

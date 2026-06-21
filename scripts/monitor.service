@@ -1,0 +1,17 @@
+[Unit]
+Description=System Monitor Service
+After=network.target
+
+[Service]
+Type=simple
+User=lz
+WorkingDirectory=/media/lz/baba/monitor/scripts
+ExecStart=/media/lz/baba/monitor/scripts/monitor_main.sh -c
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=system-monitor
+
+[Install]
+WantedBy=multi-user.target
